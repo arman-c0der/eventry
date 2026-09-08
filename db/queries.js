@@ -21,7 +21,9 @@ async function getEventById(eventId) {
 }
 
 async function createUser(user) {
-    return await userModel.create(user);
+    await dbConnect();
+    const newUser = await userModel.create(user);
+    return newUser;
 }
 
 async function findUserByCredentials(credentials) {
