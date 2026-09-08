@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { eventModel } from "../models/event-models";
 import { userModel } from "../models/user-model";
-
+import { dbConnect } from "../services/mongo";
 import { replaceMongoIdInArray, replaceMongoIdInObject } from "../utils/data-util";
 
 async function getAllEvents(query) {
