@@ -15,30 +15,26 @@ const LoginForm = () => {
 
   async function onSubmit(event) {
     event.preventDefault();
-    setError('');
 
     try {
-      const formData = new FormData(event.currentTarget);
+        const formData = new FormData(event.currentTarget);
 
-      const found = await performLogin(formData);
+        const found = await performLogin(formData);
 
-      if (found) {
-        // Login successful
+        if (!found) {
+            toast.error("Invalid email or password!");
+            return;
+        }
+
         setAuth(found);
+        toast.success("Login successful!");
 
-        toast.success('Login successful!');
-
-        router.push('/');
-      } else {
-        // Email/password doesn't match
-        toast.error('Invalid email or password!');
-        setError('Please provide a valid login credential');
-      }
-    } catch (err) {
-      toast.error(err.message || 'Something went wrong!');
-      setError(err.message || 'Something went wrong!');
+        router.push("/");
+    } catch (error) {
+        console.error("Login error:", error);
+        toast.error("Something went wrong. Please try again.");
     }
-  }
+}
 
   return (
     <>

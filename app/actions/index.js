@@ -12,15 +12,12 @@ async function registerUser(formData) {
 }
 
 async function performLogin(formData) {
-    try {
-        const credential = {};
-        credential.email = formData.get("email");
-        credential.password = formData.get("password");
-        const found = await findUserByCredentials(credential);
-        return found;
-    } catch (error) {
-        throw error;
-    }
+    const credential = {
+        email: formData.get("email"),
+        password: formData.get("password"),
+    };
+
+    return await findUserByCredentials(credential);
 }
 
 async function addInterestedEvent(eventId, authId) {
